@@ -1,0 +1,28 @@
+build:
+  image: builder-mutation-2016-03-25
+  pull: true
+  environment:
+    - PGUSER=mfg
+    - PG_PASSWORD=mfg
+    - PGHOST=127.0.0.1
+  commands:
+    - sleep 15
+    - psql -c 'create database psugdemo_test;'
+    - ci/build.sh
+notify:
+  # slack:
+  #   webhook_url: 'https://hooks.slack.com/services/xxx'
+  #   username: 'drone.io'
+  #   channel: '#psugdemo'
+  #   on_started: true
+  #   on_success: true
+  #   on_failure: true
+compose:
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=mfg
+      - POSTGRES_PASSWORD=mfg
+cache:
+  mount:
+    - .ivy2

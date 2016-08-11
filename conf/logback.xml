@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+  <conversionRule conversionWord="coloredLevel" converterClass="play.api.Logger$ColoredLevel" />
+
+  <appender name="JTO-STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+  </appender>
+
+  <appender name="JTO-FILE" class="ch.qos.logback.core.FileAppender">
+   <file>${application.home}/logs/application.log</file>
+   <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+ </appender>
+
+  <logger name="play" level="INFO" />
+  <logger name="application" level="WARN" />
+  <logger name="com.zaxxer.hikari.pool.HikariPool" level="WARN" />
+  <logger name="org.flywaydb.core.internal.command.DbMigrate" level="WARN" />
+  <logger name="org.flywaydb.core.internal.command.DbValidate" level="WARN" />
+  <logger name="org.flywaydb.core.internal.dbsupport.DbSupportFactory" level="WARN" />
+  <logger name="org.flywaydb.core.internal.metadatatable.MetaDataTableImpl" level="WARN" />
+  <logger name="org.flywaydb.core.internal.util.VersionPrinter" level="WARN" />
+  <logger name="com.zaxxer.hikari.HikariDataSource" level="WARN" />
+  <logger name="akka.event.slf4j.Slf4jLogger" level="WARN" />
+
+  <root level="INFO">
+    <appender-ref ref="JTO-STDOUT" />
+    <appender-ref ref="JTO-FILE" />
+  </root>
+</configuration>
