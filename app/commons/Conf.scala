@@ -41,4 +41,11 @@ case class Conf(configuration: Configuration) {
     val name = config.getString("db.default.name")
     val url = config.getString("db.default.url")
   }
+
+  object Strava {
+    val clientId = models.Strava.ClientId(config.getString("strava.client.id"))
+    val clientSecret = models.Strava.ClientSecret(config.getString("strava.client.secret"))
+    val apiRateLimit = config.getLong("strava.api.max-calls-per-seconds")
+    val apiActivitiesPerPage = config.getInt("strava.api.activities-per-page")
+  }
 }

@@ -53,6 +53,7 @@ case class InfluxMetrics(conf: Conf, ctx: Contexts) extends Metrics {
 object Metrics {
 
   object HttpCat extends Category("http")
+  object StravaCat extends Category("strava")
 
   type ST = default.ST[Unit]
   type Pre[A] = default.DPre[Future, Unit, A]

@@ -72,7 +72,8 @@ lazy val root =
       "org.postgresql" % "postgresql" % "9.4.1209",
       "org.scalatest" %% "scalatest" % "2.2.6" % "test",
       "org.scalacheck" %% "scalacheck" % "1.13.2" % "test",
-      "org.influxdb" % "influxdb-java" % "2.2"
+      "org.influxdb" % "influxdb-java" % "2.2",
+      "org.http4s" %% "http4s-blaze-client" % "0.14.2a"
       ),
     routesImport ++= Seq(
       "com.mfglabs.models._",
