@@ -8,7 +8,7 @@ case class Conf(configuration: Configuration) {
 
   import java.net.InetAddress
 
-  val config = configuration.underlying
+  private val config = configuration.underlying
 
   private def getOpt(path: String): Option[String] =
     if (config.hasPath(path))

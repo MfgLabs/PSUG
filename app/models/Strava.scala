@@ -44,7 +44,6 @@ object WSCommons {
   implicit val jsvalueDecoder = EntityDecoder.decodeBy(MediaRange.`*/*`)(collectJsValue) // */
 }
 
-import akka.stream.ActorMaterializer
 case class StravaComponent(
     conf: commons.Conf,
     client: Client,

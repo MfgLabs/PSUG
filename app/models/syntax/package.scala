@@ -10,7 +10,7 @@ object syntax {
     import scalaz.{ \/-, -\/ }
     val p: Promise[A] = Promise()
     def runFuture(): Future[A] = {
-      x.runAsync {
+      x.unsafePerformAsync {
         case -\/(ex) =>
           p.failure(ex); ()
         case \/-(r) => p.success(r); ()

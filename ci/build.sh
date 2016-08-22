@@ -25,7 +25,7 @@ function err {
 
 function branchname {  set +o nounset
   if [ -n "${DRONE_BRANCH}" ]; then
-    basename "${DRONE_BRANCH}" # get branch name from jenkins
+    basename "${DRONE_BRANCH}"
   else
     git reflog HEAD | grep 'checkout:' | head -1 | rev | cut -d' ' -f1 | rev
   fi
