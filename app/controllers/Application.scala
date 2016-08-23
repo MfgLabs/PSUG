@@ -46,19 +46,19 @@ case class Application(
     async(Timed) { r =>
       import java.time.Instant
       import java.time.temporal.ChronoUnit._
+      import scalaz.std.list._
 
       val from = Instant.now.minus(90, DAYS)
+      val go =
+        strava.allActivities(token)(from)
+          .map(_.leftMap(_ => List[strava.ActivityAndId]()).merge)
 
-      for {
-        acts <- strava.allActivities(token)(from)
-      } yield {
-        acts.leftMap { err =>
-          r.mc.logger.info("error while loading strava info", Macros.params(err))
-          InternalServerError
-        }.map { m =>
-          Ok(Write[JsValue](m))
-        }.merge
-      }
+      (for {
+        _act <- trans(go)
+        (id, act) = _act
+        add = db.run(strava.add(id, act))(r.mc.st)
+        _ <- trans(add.lift[List])
+      } yield ()).run.map(_ => NoContent)
     }
 
 }

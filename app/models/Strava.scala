@@ -75,7 +75,7 @@ case class StravaComponent(
     client: Client,
     metrics: commons.Metrics,
     ctx: commons.Contexts
-) {
+) extends db.StravaWrites {
 
   import com.mfglabs.precepte._, default._, corescalaz._, Macros.callee
   import scalaz.syntax.applicative._

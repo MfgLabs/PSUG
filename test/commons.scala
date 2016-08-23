@@ -44,7 +44,7 @@ import doobie.util.pretty._
 import scalaz.concurrent.Task
 import scalaz._
 
-// Shamelessly stolen from https://gist.github.com/veegee/ac202e30579ab6aaf68f3bd007208e67
+// Shamelessly taken from https://gist.github.com/veegee/ac202e30579ab6aaf68f3bd007208e67
 trait QueryChecker extends WordSpec {
   def transactor: Transactor[Task]
 
@@ -65,7 +65,7 @@ trait QueryChecker extends WordSpec {
 
   /** Check if the analysis has an error */
   private def hasError(analysis: ConnectionIO[Analysis]): Boolean = {
-    transactor.trans(analysis).attemptRun match {
+    transactor.trans(analysis).unsafePerformSyncAttempt match {
       case -\/(e) => true
       case \/-(a) => !(a.paramDescriptions.map { case (s, es) => es.isEmpty } ++ a.columnDescriptions.map { case (s, es) => es.isEmpty }).forall(x => x)
     }
@@ -73,7 +73,7 @@ trait QueryChecker extends WordSpec {
 
   private def checkAnalysis(typeName: String, stackFrame: Option[StackTraceElement], sql: String, analysis: ConnectionIO[Analysis]) = {
     if (hasError(analysis)) {
-      val analysisOutput = transactor.trans(analysis).attemptRun match {
+      val analysisOutput = transactor.trans(analysis).unsafePerformSyncAttempt match {
         case -\/(e) =>
           failure("SQL Compiles and Typechecks", formatError(e.getMessage))
         case \/-(a) =>

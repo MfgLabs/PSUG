@@ -1,5 +1,6 @@
 package com.mfglabs
-package models.db
+package models
+package db
 
 import com.mfglabs.commons.{ Metrics, Contexts, MonitoringContext }
 import scala.concurrent.Future
@@ -25,8 +26,13 @@ object Await {
 }
 
 object Atoms {
-  // import doobie.imports._
-  // import models._
+  import doobie.imports._
+  import models._
+  import java.sql.Timestamp
+  import java.time.Instant
+
+  implicit val instantMeta: Meta[Instant] =
+    Meta[Timestamp].nxmap(_.toInstant, Timestamp.from)
 }
 
 object Database {
@@ -85,7 +91,8 @@ case class Database(ctx: Contexts, conf: commons.Conf, metrics: Metrics) {
       import doobie.imports._
       val down =
         List(
-          sql"drop table IF EXISTS schema_version"
+          sql"drop table IF EXISTS schema_version",
+          sql"drop schema IF EXISTS strava CASCADE"
         )
 
       for {

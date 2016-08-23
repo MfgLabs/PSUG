@@ -6,9 +6,11 @@
 
 create schema strava;
 
-create table activities (
-  id               INTEGER  NOT NULL PRIMARY KEY,
-  strat_date       TIMESTAMP NOT NULL,
+create table strava.activities (
+  id               BIGINT    NOT NULL PRIMARY KEY,
+  athlete          BIGINT    NOT NULL,
+  distance         REAL      NOT NULL,
+  start_date       TIMESTAMP NOT NULL,
   created_at       TIMESTAMP NOT NULL DEFAULT now(),
   updated_at       TIMESTAMP NOT NULL DEFAULT now()
 );
