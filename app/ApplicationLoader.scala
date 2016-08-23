@@ -27,7 +27,7 @@ class DemoComponents(context: Context)
   lazy val metrics = InfluxMetrics(conf, ctx)
 
   lazy val httpClient = org.http4s.client.blaze.defaultClient
-  lazy val strava = models.StravaComponent(conf, httpClient, metrics, ctx)
+  lazy val strava = models.StravaComponent(conf, httpClient, metrics, ctx, database)
 
   lazy val applicationController = new controllers.Application(metrics, conf, ctx, database, strava)
   lazy val assets = new _root_.controllers.Assets(httpErrorHandler)

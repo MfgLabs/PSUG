@@ -61,4 +61,11 @@ case class Application(
       } yield ()).run.map(_ => NoContent)
     }
 
+  def list =
+    async(Timed) { r =>
+      for {
+        acts <- strava.activities
+      } yield Ok(Write[JsValue](acts))
+    }
+
 }

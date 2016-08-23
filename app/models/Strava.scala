@@ -74,8 +74,9 @@ case class StravaComponent(
     conf: commons.Conf,
     client: Client,
     metrics: commons.Metrics,
-    ctx: commons.Contexts
-) extends db.StravaWrites {
+    ctx: commons.Contexts,
+    db: models.db.Database
+) extends db.StravaWrites with db.StravaReads {
 
   import com.mfglabs.precepte._, default._, corescalaz._, Macros.callee
   import scalaz.syntax.applicative._
@@ -108,7 +109,7 @@ case class StravaComponent(
       result.runFuture()
     }
 
-  def activities(token: Strava.Token)(after: Instant): Pre[Strava.Error \/ List[ActivityAndId]] =
+  private def activities(token: Strava.Token)(after: Instant): Pre[Strava.Error \/ List[ActivityAndId]] =
     TimedM { mc =>
       mc.logger.debug("fetching Strava activities", Macros.params(after))
       val request = external.StravaRoutes.activities(conf.Strava.apiActivitiesPerPage)(token)(after)
