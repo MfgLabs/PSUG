@@ -4,7 +4,7 @@ package db
 
 import org.scalatest._
 
-class DemoSpec extends WordSpec with Matchers {
+class StravaSpec extends WordSpec with Matchers {
   import Helpers._
 
   import doobie.imports._
