@@ -10,3 +10,4 @@ target
 .ensime
 .ensime_cache/
 conf/_private.conf
+*.csv
