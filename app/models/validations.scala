@@ -21,10 +21,17 @@ trait LowPriorityDerivations {
 }
 
 object validations extends LowPriorityDerivations {
+
   implicit def instantR[I](implicit r: Rule[I, String]): Rule[I, Instant] =
     r andThen Rule.fromMapping[String, Instant] { s =>
       scala.util.Try(Instant.from(DateTimeFormatter.ISO_INSTANT.parse(s)))
         .map(cats.data.Validated.Valid.apply)
         .getOrElse(cats.data.Validated.Invalid(Seq(ValidationError("error.expected.instant.format", s))))
     }
+
+  implicit def instantW[I](implicit w: Write[String, I]): Write[Instant, I] =
+    w.contramap { i =>
+      DateTimeFormatter.ISO_INSTANT.format(i)
+    }
+
 }

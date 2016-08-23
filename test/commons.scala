@@ -4,19 +4,19 @@ import play.api._
 
 object Helpers {
 
-  class AmerTestApplicationLoader {
+  class DemoTestApplicationLoader {
     def load(context: ApplicationLoader.Context) = {
-      new AmerComponents(context)
+      new DemoComponents(context)
     }
   }
 
   val testCtx = ApplicationLoader.createContext(new Environment(new java.io.File("."), ApplicationLoader.getClass.getClassLoader, Mode.Test))
 
   class WithApplicationLoader(
-      applicationLoader: AmerTestApplicationLoader,
+      applicationLoader: DemoTestApplicationLoader,
       context: ApplicationLoader.Context = testCtx
   ) {
-    def apply(f: AmerComponents => Any) = {
+    def apply(f: DemoComponents => Any) = {
       implicit lazy val ctx = applicationLoader.load(context)
       test.Helpers.running(ctx.application) {
         try { f(ctx) }
@@ -27,7 +27,7 @@ object Helpers {
   }
 
   object TestApp {
-    def apply(f: AmerComponents => Any) = new WithApplicationLoader(new AmerTestApplicationLoader).apply(f)
+    def apply(f: DemoComponents => Any) = new WithApplicationLoader(new DemoTestApplicationLoader).apply(f)
   }
 }
 

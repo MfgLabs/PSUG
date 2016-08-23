@@ -48,4 +48,6 @@ case class Conf(configuration: Configuration) {
     val apiRateLimit = config.getLong("strava.api.max-calls-per-seconds")
     val apiActivitiesPerPage = config.getInt("strava.api.activities-per-page")
   }
+
+  (Strava, Database) // XXX: force initialisation of those objects
 }
