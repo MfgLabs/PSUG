@@ -1,6 +1,6 @@
 import org.scoverage.coveralls.Imports.CoverallsKeys._
 
-lazy val precepteVersion = "0.4.0"
+lazy val precepteVersion = "0.4.2"
 
 lazy val specVersion = "2.4.17"
 
