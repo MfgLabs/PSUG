@@ -36,7 +36,7 @@ class DemoSimulation extends Simulation {
       exec(flattenMapIntoAttributes("${token}"))
         .exec(
           http("load")
-            .post("/load")
+            .post("/activities/load")
             .queryParam("token", "${token}")
             .check(status is 204)
         ).pause(2 seconds)
