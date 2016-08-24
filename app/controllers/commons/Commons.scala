@@ -31,7 +31,7 @@ trait Commons {
   import corescalaz._
   import scalaz.syntax.applicative._
 
-  private def initialState = ()
+  private val initialState = ()
   private def version = default.Version(BuildInfo.version)
   private def environment =
     conf.environment match {

@@ -25,10 +25,11 @@ Seq(
       "-encoding", "UTF-8",
       "-unchecked",
       "-Yno-adapted-args",
-      // "-Ywarn-dead-code",        // N.B. doesn't work well with the ??? hole
+      "-Ywarn-dead-code",        // N.B. doesn't work well with the ??? hole
       "-Ywarn-numeric-widen",
       "-Ywarn-value-discard",
       "-Xfuture",
+      "-Ywarn-unused",
       "-Ywarn-unused-import",
       "-Ydelambdafy:method",
       "-Ybackend:GenBCode",
@@ -70,7 +71,6 @@ lazy val root =
       "org.tpolecat" %% "doobie-contrib-postgresql" % doobieVersion,
       "org.flywaydb" %% "flyway-play" % "3.0.1",
       "org.postgresql" % "postgresql" % "9.4.1209",
-      "org.scalatest" %% "scalatest" % "2.2.6" % "test",
       "org.scalacheck" %% "scalacheck" % "1.13.2" % "test",
       "org.influxdb" % "influxdb-java" % "2.2",
       "org.http4s" %% "http4s-blaze-client" % "0.14.2a"

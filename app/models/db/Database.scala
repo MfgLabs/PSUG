@@ -27,7 +27,6 @@ object Await {
 
 object Atoms {
   import doobie.imports._
-  import models._
   import java.sql.Timestamp
   import java.time.Instant
 
