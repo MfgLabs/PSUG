@@ -37,11 +37,18 @@ case class InfluxMetrics(conf: Conf, ctx: Contexts) extends Metrics {
 
   val monitor = influx.map(_.monitor).getOrElse(noop)
 
-  override def Timed[A](category: Category)(f: MonitoringContext => Future[A])(implicit fu: scalaz.Functor[Future], callee: Callee, ec: scala.concurrent.ExecutionContext): Pre[A] =
-    super.Timed(category)(f).mapSuspension(monitor)
+  private def transform[A](p: Pre[A]): Pre[A] =
+    p.mapSuspension(monitor)
 
-  override def TimedM[A](category: Category)(f: MonitoringContext => Pre[A])(implicit mo: scalaz.Monad[Future], callee: Callee, ec: scala.concurrent.ExecutionContext): Pre[A] =
-    super.TimedM(category)(f).mapSuspension(monitor)
+  override def Timed[A](category: Category)(f: MonitoringContext => Future[A])(implicit fu: scalaz.Functor[Future], callee: Callee, ec: scala.concurrent.ExecutionContext): Pre[A] = {
+    val pre = super.Timed(category)(f)
+    transform(pre)
+  }
+
+  override def TimedM[A](category: Category)(f: MonitoringContext => Pre[A])(implicit mo: scalaz.Monad[Future], callee: Callee, ec: scala.concurrent.ExecutionContext): Pre[A] = {
+    val pre = super.TimedM(category)(f)
+    transform(pre)
+  }
 }
 
 object Metrics {
