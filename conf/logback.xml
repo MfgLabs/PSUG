@@ -12,7 +12,7 @@
  </appender>
 
   <logger name="play" level="INFO" />
-  <logger name="application" level="WARN" />
+  <logger name="application" level="DEBUG" />
   <logger name="com.zaxxer.hikari.pool.HikariPool" level="WARN" />
   <logger name="org.flywaydb.core.internal.command.DbMigrate" level="WARN" />
   <logger name="org.flywaydb.core.internal.command.DbValidate" level="WARN" />

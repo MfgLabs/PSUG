@@ -18,6 +18,11 @@ class DemoComponents(context: Context)
 
   import commons._
 
+  // See https://www.playframework.com/documentation/2.5.x/SettingsLogger
+  LoggerConfigurator(context.environment.classLoader).foreach {
+    _.configure(context.environment)
+  }
+
   val flyway = new org.flywaydb.play.PlayInitializer(configuration, environment, webCommands)
 
   lazy val conf = Conf(configuration)
