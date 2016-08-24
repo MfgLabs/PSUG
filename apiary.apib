@@ -7,4 +7,46 @@ PSUG Demo API specification.
 
 # Data Structures
 
-# Group Users management
+## Activity
+- id: 684908385 (required, number) - Activity Id
+- start_date: `2016-08-22T06:23:57Z` (required, string) - Activity date
+- athlete: 304460 (required, number) - Athlete Id
+- distance: 43622.7 (required, number) - Distance in meters
+
+# Group health check
+
+## Status [/status]
+
+### Get application status [GET]
+
++ Response 200 (application/json; charset=utf-8)
+
+  + Attributes
+      - version: `1.0-89518a4` (required, string) - Application version
+      - build time: `2016-08-24 12:53:05.197` (required, string)
+      - checks
+          - name: `demopsug (Postgresql)` (required, string) - Check name
+          - test: `SELECT 1` (required, string) - Test details
+          - status: 200 (required, number)
+          - message (optional, string)
+
+# Group strava
+
+## Load activities [/activities/load{?token}]
+
++ Parameters
+  - token: `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` (required, string) - User strava token
+
+## Load recent activities [POST]
+
++ Response 204
+
+## Activities [/activities]
+
+### List activities [GET]
+
+Return all activities stored in DB
+
++ Response 200 (application/json; charset=utf-8)
+
+  + Attributes (array[Activity])

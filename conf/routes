@@ -5,5 +5,5 @@
 # basics
 
 GET     /status                                         com.mfglabs.controllers.Application.status
-POST    /load                                           com.mfglabs.controllers.Application.load(token: Strava.Token)
+POST    /activities/load                                com.mfglabs.controllers.Application.load(token: Strava.Token)
 GET     /activities                                     com.mfglabs.controllers.Application.list
