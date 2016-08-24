@@ -2,6 +2,9 @@
 
 This document is a quick start for PSUG Demo Application.
 
+This application was written for Paris Scala User Group [#65](http://www.meetup.com/Paris-Scala-User-Group-PSUG/events/233348116/).
+Presentation slides are available on [Google Docs](https://docs.google.com/presentation/d/16HA6wN_GtHPFLrICqF4X3XFcWVGw6BxIZ24J3Lu84yY/edit?usp=sharing).
+
 ## Requirements
 
 This project requires Java 8 and SBT.
@@ -95,7 +98,7 @@ The demo process is very simple. Each Drone build runs the tests with code cover
 A more common flow should be:
 - Run the tests with code coverage and publish the report.
 - Build a ZIP file containing all JAR needed to run the application.
-- Upload the archive on a storage service.
+- Upload the archive on a storage service for a later deployment.
 
 ### Deploying in *development* environment
 
