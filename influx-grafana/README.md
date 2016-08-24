@@ -105,3 +105,8 @@ Database calls:
 ```
 SELECT "execution_time" FROM "response_times" WHERE "category" = 'database' AND $timeFilter GROUP BY "method"
 ```
+
+A dashboard example:
+
+![Dashboard Example](/influx-grafana/psugdemo_dashboard.png)
+
