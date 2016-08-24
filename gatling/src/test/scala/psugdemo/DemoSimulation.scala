@@ -9,7 +9,7 @@ class DemoSimulation extends Simulation {
 
   val httpConf = http.baseURL("http://127.0.0.1:9000")
 
-  val tokens = csv("tokens.csv").random
+  val tokens = csv("tokens.csv").records
 
   val statusScenario = scenario("Status")
     .forever(
@@ -21,24 +21,36 @@ class DemoSimulation extends Simulation {
         )
     )
 
-  val loadScenario = scenario("Load")
-    .feed(tokens)
+  val activitiesScenario = scenario("Activities")
     .forever(
-      pace(10 seconds)
+      pace(5 seconds, 15 seconds)
+        .exec(
+          http("activities")
+            .get("/activities")
+            .check(status is 200)
+        )
+    )
+
+  val loadScenario = scenario("Load")
+    .foreach(tokens, "token") {
+      exec(flattenMapIntoAttributes("${token}"))
         .exec(
           http("load")
             .post("/load")
             .queryParam("token", "${token}")
-            .check(status is 200)
-        )
-    )
+            .check(status is 204)
+        ).pause(2 seconds)
+    }
 
   setUp(
     statusScenario.inject(
       atOnceUsers(1)
     ),
     loadScenario.inject(
-      rampUsers(5) over (10 seconds)
+      atOnceUsers(1)
+    ),
+    activitiesScenario.inject(
+      rampUsers(10) over (30 seconds)
     )
   ).protocols(httpConf)
     .maxDuration(5 minutes)
