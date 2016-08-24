@@ -8,7 +8,6 @@ lazy val doobieVersion = "0.3.0"
 
 lazy val commons =
 Seq(
-  // coverallsToken := Some("DXhXnnivC1fkV5aKpOwHjWPaH27wC6wAu"),
   logLevel in update := Level.Warn,
   organization := "com.mfglabs",
   name := """psug-demo""",
@@ -71,9 +70,9 @@ lazy val root =
       "org.tpolecat" %% "doobie-contrib-postgresql" % doobieVersion,
       "org.flywaydb" %% "flyway-play" % "3.0.1",
       "org.postgresql" % "postgresql" % "9.4.1209",
-      "org.scalacheck" %% "scalacheck" % "1.13.2" % "test",
       "org.influxdb" % "influxdb-java" % "2.2",
-      "org.http4s" %% "http4s-blaze-client" % "0.14.2a"
+      "org.http4s" %% "http4s-blaze-client" % "0.14.2a",
+      "org.scalatest" % "scalatest_2.11" % "3.0.0" % "test"
       ),
     routesImport ++= Seq(
       "com.mfglabs.models._",
