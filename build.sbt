@@ -8,7 +8,6 @@ lazy val doobieVersion = "0.3.0"
 
 lazy val commons =
 Seq(
-  // coverallsToken := Some("DXhXnnivC1fkV5aKpOwHjWPaH27wC6wAu"),
   logLevel in update := Level.Warn,
   organization := "com.mfglabs",
   name := """psug-demo""",

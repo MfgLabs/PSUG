@@ -5,6 +5,7 @@ build:
     - PGUSER=mfg
     - PG_PASSWORD=mfg
     - PGHOST=127.0.0.1
+    - COVERALLS_REPO_TOKEN=$$COVERALLS_REPO_TOKEN
   commands:
     - sleep 15
     - psql -c 'create database psugdemo_test;'

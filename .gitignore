@@ -11,3 +11,4 @@ target
 .ensime_cache/
 conf/_private.conf
 *.csv
+.secrets_clear.yml
