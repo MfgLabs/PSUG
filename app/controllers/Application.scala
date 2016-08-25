@@ -44,6 +44,7 @@ case class Application(
 
   def load(token: Strava.Token) =
     async(Timed) { r =>
+      r.mc.logger.debug("Calling load action")
       import java.time.Instant
       import java.time.temporal.ChronoUnit._
       import scalaz.std.list._
@@ -63,6 +64,7 @@ case class Application(
 
   def list =
     async(Timed) { r =>
+      r.mc.logger.debug("Calling list action")
       for {
         acts <- strava.activities
       } yield Ok(Write[JsValue](acts))
