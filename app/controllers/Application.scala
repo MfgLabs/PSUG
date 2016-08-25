@@ -63,8 +63,9 @@ case class Application(
 
   def list =
     async(Timed) { r =>
+      val pacs: Metrics.Pre[List[(models.Strava.Activity.Id, models.Strava.Activity)]] = ???
       for {
-        acts <- strava.activities
+        acts <- pacs
       } yield Ok(Write[JsValue](acts))
     }
 

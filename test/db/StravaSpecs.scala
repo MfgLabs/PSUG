@@ -27,7 +27,6 @@ class StravaSpec extends WordSpec with Matchers {
       val act = Activity(Date(Instant.now), Athlete(123), Distance(10000f))
 
       check(StravaWritesQueries.add(id, act))
-      check(StravaReadsQueries.activities)
     }
   }
 

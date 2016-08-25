@@ -8,11 +8,7 @@ object StravaReadsQueries {
   import Strava._
   import Atoms._
 
-  def activities =
-    sql"""
-      SELECT id, start_date, athlete, distance
-      FROM strava.activities
-    """.query[(Activity.Id, Activity)]
+  def activities: Query0[(Activity.Id, Activity)] = ???
 }
 
 trait StravaReads {
@@ -23,9 +19,4 @@ trait StravaReads {
 
   private val Q = StravaReadsQueries
 
-  def activities(implicit ec: DBExeCtx) =
-    db.WithCon { mc =>
-      mc.logger.debug("listing all activities")
-      Q.activities.list
-    }
 }
