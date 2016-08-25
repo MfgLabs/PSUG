@@ -14,20 +14,20 @@ Follow the instructions bellow to setup the required databases.
 
 First, create `mfg` user:
 
-```
+```sql
 CREATE USER mfg WITH PASSWORD 'mfg';
 ```
 
 Then, create `psugdemo` database and grant privileges to `mfg` user:
 
-```
+```sql
 CREATE DATABASE psugdemo;
 GRANT ALL PRIVILEGES ON DATABASE psugdemo TO mfg;
 ```
 
 Tests require a separate DB. Create `psugdemo_test` database and grant privileges to `mfg` user:
 
-```
+```sql
 CREATE DATABASE psugdemo_test;
 GRANT ALL PRIVILEGES ON DATABASE psugdemo_test TO mfg;
 ```
