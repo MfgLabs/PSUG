@@ -25,19 +25,20 @@ class DemoComponents(context: Context)
 
   val flyway = new org.flywaydb.play.PlayInitializer(configuration, environment, webCommands)
 
-  lazy val conf = Conf(configuration)
-  lazy val database = Database(ctx, conf, metrics)
+  val conf = Conf(configuration)
 
-  lazy val ctx = Contexts(actorSystem)
-  lazy val metrics = InfluxMetrics(conf, ctx)
+  val ctx = Contexts(actorSystem)
+  val metrics = InfluxMetrics(conf, ctx)
 
-  lazy val httpClient = org.http4s.client.blaze.defaultClient
-  lazy val strava = models.StravaComponent(conf, httpClient, metrics, ctx, database)
+  val database = Database(ctx, conf, metrics)
 
-  lazy val applicationController = new controllers.Application(metrics, conf, ctx, database, strava)
-  lazy val assets = new _root_.controllers.Assets(httpErrorHandler)
+  val httpClient = org.http4s.client.blaze.defaultClient
+  val strava = models.StravaComponent(conf, httpClient, metrics, ctx, database)
 
-  lazy val router = new Routes(httpErrorHandler, applicationController)
+  val applicationController = new controllers.Application(metrics, conf, ctx, database, strava)
+  val assets = new _root_.controllers.Assets(httpErrorHandler)
+
+  val router = new Routes(httpErrorHandler, applicationController)
 }
 
 object DemoComponents {
