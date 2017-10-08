@@ -23,6 +23,8 @@ class DemoComponents(context: Context)
     _.configure(context.environment)
   }
 
+  override lazy val httpFilters = Seq(gzipFilter)
+
   val flyway = new org.flywaydb.play.PlayInitializer(configuration, environment, webCommands)
 
   val conf = Conf(configuration)
